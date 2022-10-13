@@ -1,5 +1,9 @@
+//define requirements
 const Sequelize = require('sequelize');
 require('dotenv').config();
+const mysql = require('mysql2');
+
+//connect to mysql
 let sequelize;
 if (process.env.JAWSDB_URL) {
     sequelize = new Sequelize(process.env.JAWSDB_URL);
@@ -10,5 +14,5 @@ if (process.env.JAWSDB_URL) {
         port: 3306
     });
 }
-module.exports = sequelize;
-//commit
+
+module.exports = sequelize, mysql;

@@ -3,21 +3,14 @@ const sequelize = require("../config/connection");
 const { Blog, User, Comment, Workout } = require("../models");
 const withAuth = require("../utils/auth");
 
-//add workout routes-    /dashboard
-// router.get('/',withAuth, (req,res) => {
-
-//     res.render('dashboard', {loggedIn: true})
-
-// } );
-
 var workouts;
 var blogs;
 
+//get all workouts
 router.get("/", withAuth, (req, res) => {
   Workout.findAll({
     where: {
       user_id: req.session.user_id,
-      // user_id: 2
     },
     attributes: [
       "id",
@@ -27,7 +20,6 @@ router.get("/", withAuth, (req, res) => {
       "calories_consumed",
       "current_weight",
       "user_id",
-      // "username"
     ],
     include: [
       {
@@ -36,14 +28,11 @@ router.get("/", withAuth, (req, res) => {
       },
     ],
   }).then((dbWorkoutData) => {
-    //console.log(dbWorkoutData);
     workouts = dbWorkoutData.map((work) => work.get({ plain: true }));
-    // res.render('dashboard', { workouts, loggedIn: true });
-    //console.log(workouts);
 
+    //get allblogs
     Blog.findAll({
       where: {
-        // user_id: req.session.user_id
         user_id: req.session.user_id,
       },
       attributes: ["id", "title", "blog_post", "created_at"],
@@ -71,8 +60,6 @@ router.get("/", withAuth, (req, res) => {
 
       .then((dbPostData) => {
         blogs = dbPostData.map((blog) => blog.get({ plain: true }));
-        console.log(workouts);
-        console.log("blogs are ", blogs);
         res.render("dashboard", { workouts, blogs, loggedIn: true });
       })
       .catch((err) => {

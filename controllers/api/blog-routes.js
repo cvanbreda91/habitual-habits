@@ -1,8 +1,8 @@
 const router = require("express").Router();
-// const sequelize = require("../../config/connection");
 const { Blog, User, Comment} = require("../../models");
 const withAuth = require("../../utils/auth");
 
+//get all blogs
 router.get("/", (req, res) => {
   Blog.findAll({
     attributes: ["id", "blog_post", "title", "created_at"],
@@ -27,6 +27,8 @@ router.get("/", (req, res) => {
       res.status(500).json(err);
     });
 });
+
+//get one blogs
 router.get("/:id", (req, res) => {
   Blog.findOne({
     where: {
@@ -61,13 +63,13 @@ router.get("/:id", (req, res) => {
     });
 });
 
+//create a new blog
 router.post("/", withAuth, (req, res) => {
-  // expects {title: 'Taskmaster goes public!', blog_post: 'https://taskmaster.com/press', user_id: 1}
+  // expects {title: 'Taskmaster goes public!', blog_post: 'Lorem Ipsum', user_id: 1}
   Blog.create({
     title: req.body.title,
     blog_post: req.body.blog_post,
-    user_id: req.session.user_id,
-    //user_id: req.session.user_id
+    user_id: req.session.user_id
   })
     .then((dbBlogData) => res.json(dbBlogData))
     .catch((err) => {
@@ -76,6 +78,7 @@ router.post("/", withAuth, (req, res) => {
     });
 });
 
+//update blog
 router.put("/:id", withAuth, async (req, res) => {
   console.log(req.params.id)
   await Blog.update(
@@ -101,6 +104,7 @@ router.put("/:id", withAuth, async (req, res) => {
     });
 });
 
+//delete blog
 router.delete("/:id", withAuth, (req, res) => {
   console.log("id:", req.params.id);
   Blog.destroy({

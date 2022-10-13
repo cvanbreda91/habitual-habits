@@ -1,8 +1,6 @@
 async function workoutFormHandler(event) {
     event.preventDefault();
 
-    //update if different ids used in handlebars
-    // const exercise_type = document.querySelector('#exercise_type').value.trim();
     const exercise_type = document.querySelector('input[name="exercise_type"]').value.trim();
     const exercise_duration = document.querySelector('input[name="exercise_duration"]').value.trim();
     const calories_burned = document.querySelector('input[name="calories_burned"]').value.trim();
@@ -32,5 +30,4 @@ async function workoutFormHandler(event) {
 
 }
 
-//update if different classes used in handlebars
 document.querySelector('#workout-form').addEventListener('submit', workoutFormHandler);

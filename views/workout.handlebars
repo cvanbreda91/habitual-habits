@@ -1,56 +1,47 @@
-<div class="container">
-    <div class="row">
-        <section class="col-6">
-            <h2>Create New Workout</h2>
+<h2>Create a Workout</h2>
+<form id="workout-form">
+  <div class="form-group">
+    <label for="exercise_type">Type of Exercise</label><br>
+    <input type="text" class="form-control" id="exercise_type" name="exercise_type" placeholder="Run">
+  </div>
+  <div class="form-group">
+    <label for="exercise_duration">Duration of Exercise in Minutes</label><br>
+    <input type="text" class="form-control" id="exercise_duration" name="exercise_duration" placeholder="20">
+  </div>
+  <div class="form-group">
+    <label for="calories_burned">Calories Burned</label><br>
+    <input type="text" class="form-control" id="calories_burned" name="calories_burned" placeholder="100">
+  </div>
+  <div class="form-group">
+    <label for="calories_consumed">Calories Consumed</label><br>
+    <input type="text" class="form-control" id="calories_consumed" name="calories_consumed" placeholder="200">
+  </div>
+  <div class="form-group">
+    <label for="current_weight">Current Weight in lbs</label><br>
+    <input type="text" class="form-control" id="current_weight" name="current_weight" placeholder="150">
+  </div>
+  <br>
+  <button type="submit" class="btn btn-success">Create Workout</button><br>
+</form><br>
 
-            <form class="workout-form" id="workout-form">
-                <div>
-                    <label for="exercise_type">Type of Exercise</label><br>
-                    <input type="text" id="exercise_type" name="exercise_type" /><br><br>
-                </div>
-                <div>
-                    <label for="exercise_duration">Duration of Exercise in Minutes</label><br>
-                    <input type="text" id="exercise_duration" name="exercise_duration">
-                </div>
-                <div>
-                    <label for="calories_burned">Calories Burned</label><br>
-                    <input type="text" id="calories_burned" name="calories_burned">
-                </div>
-                <div>
-                    <label for="calories_consumed">Calories Consumed</label><br>
-                    <input type="text" id="calories_consumed" name="calories_consumed">
-                </div>
-                <div>
-                    <label for="current_weight">Current Weight</label><br>
-                    <input type="text" id="current_weight" name="current_weight">
-                </div>
-                <button type="submit" class="btn">Create Workout</button><br>
-            </form>
-        </section><br>
 
-        <section>
-            <h2>Your Workouts</h2>
-            {{#each workouts as |workout|}}
-            {{!-- {{> post-blog-full blog}} --}}
-            <article>
+<h2>Your Workouts</h2>
+<section class="container d-flex">
+  {{#each workouts as |workout|}}
+  <div class="card d-flex" style="width: 18rem;">
     <div class="card-body">
-        <div class="card-subtitle mb-2 text-muted">
-           <strong>Date:</strong> {{format_date created_at}}
-            <ul>
-            <li style="list-style: none"><strong>Type: </strong>{{exercise_type}}</li>
-            <li style="list-style: none"><strong>Duration: </strong>{{exercise_duration}} min.</li>
-            <li style="list-style: none"><strong>Calories Burned: </strong>{{calories_burned}}</li>
-            <li style="list-style: none"><strong>Calories Consumed: </strong>{{calories_consumed}}</li>
-            <li style="list-style: none"><strong>Current Weight: </strong>{{current_weight}}</li>
-            </ul>
-        </div>
+      <h5 class="card-title">{{exercise_type}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted">{{format_date created_at}}</h6>
+      <p><strong>Duration: </strong>{{exercise_duration}} min.</p>
+      <p><strong>Calories Burned: </strong>{{calories_burned}}</p>
+      <p><strong>Calories Consumed: </strong>{{calories_consumed}}</p>
+      <p><strong>Current Weight: </strong>{{current_weight}} lbs.</p>
     </div>
-            </article>
-            
-            {{/each}}
-        </section>
-    </div>
+  </div>
+  {{/each}}
+</section>
+</div>
 </div>
 
-<script src="/javascript/add-workout.js"></script>
 <script src="/javascript/delete-workout.js"></script>
+<script src="/javascript/add-workout.js"></script>

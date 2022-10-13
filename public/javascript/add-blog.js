@@ -1,7 +1,6 @@
 async function newFormHandler(event) {
     event.preventDefault();
 
-    //can change based on handlebars
     const title = document.querySelector('input[name="blog-title"]').value;
     const blog_post = document.querySelector('textarea[name="blog-post"]').value;
 
@@ -23,5 +22,4 @@ async function newFormHandler(event) {
     }
 }
 
-//update if class of form is different
 document.querySelector('.new-blog-form').addEventListener('submit', newFormHandler);

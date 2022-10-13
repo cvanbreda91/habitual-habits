@@ -3,6 +3,7 @@ const { Router } = require("express");
 const { User, Workout } = require("../../models");
 const withAuth = require("../../utils/auth");
 
+//find all workouts
 router.get("/", (req, res) => {
   Workout.findAll()
     .then((dbWorkoutData) => res.json(dbWorkoutData))
@@ -12,6 +13,7 @@ router.get("/", (req, res) => {
     });
 });
 
+//find one workouts
 router.get("/:id", (req, res) => {
   Workout.findOne({
     where: {
@@ -25,7 +27,6 @@ router.get("/:id", (req, res) => {
       "calories_consumed",
       "current_weight",
       "user_id",
-      // "username"
     ],
     include: [
       {
@@ -47,8 +48,9 @@ router.get("/:id", (req, res) => {
     });
 });
 
+//create workout
 router.post("/", withAuth, (req, res) => {
-  // expects {title: 'Taskmaster goes public!', blog_post: 'https://taskmaster.com/press', user_id: 1}
+  // expects {exersice_type = run, exercise_duration: 20, calories_burned=20, calories_consumed=20, current_weight=100}
   Workout.create({
     exercise_type: req.body.exercise_type,
     exercise_duration: req.body.exercise_duration,
@@ -65,6 +67,7 @@ router.post("/", withAuth, (req, res) => {
     });
 });
 
+//update workout
 router.put("/:id", withAuth, async (req, res) => {
     await Workout.update(
       {
@@ -92,6 +95,7 @@ router.put("/:id", withAuth, async (req, res) => {
       });
   });
 
+  //delete workout
   router.delete("/:id", withAuth, (req, res) => {
     Workout.destroy({
       where: {

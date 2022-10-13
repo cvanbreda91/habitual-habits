@@ -1,43 +1,56 @@
 <div class="container">
-    <div class="row">
-        <article class="col-8">
-            {{#each blogs as |blog|}}
-            <h2>
-                {{blog.title}} hahaha
-            </h2>
-            <form >
-                <div>
-                    {{blog.blog_post}}
-                </div>     
 
-        <form class="comment-form col-4">
-            <div>
-                <textarea name="comment-body"></textarea>
-            </div>
-
-            <div>
-                <button id="comment-submit" type="button" class="btn">add comment</button>
-            </div>
-        </form>
-     
-     
-
-    <section class="comment">
-        <div class="meta">
-            {{#each blog.comments as |comment|}}
-        
-            {{user.username}} on {{comment.created_at}}<br>
-            {{comment.comment_text}}
-            {{/each}}
-        </div>
-    </section>
-
+  {{#each blogs as |blog|}}
+  <div class="jumbotron p-3 p-md-5 text-white rounded" style="background-color: rgb(6, 137, 6);">
+    <div class="col-md-12 px-0">
+      <h1 class="display-4 font-italic"> {{blog.title}}</h1>
+      <p class="lead my-3"> {{blog.blog_post}}</p>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card flex-md-row mb-4 box-shadow h-md-250">
+        {{#each blog.comments as |comment|}}
+        <div class="row d-flex" style="padding-left:20px ;">
+          <strong class="text-success">{{comment.comment_text}}</strong>
+          <div class="mb-4 text-muted">by {{user.username}} </div>
+          <p class="card-text mb-auto">{{comment.created_at}}</p>
+
+        </div>
+
+        {{/each}}
+      </div>
+      {{!-- </section> --}}
+    </div>
+    {{!-- <img class="card-img-right flex-auto d-none d-md-block" data-src="holder.js/200x250?theme=thumb"
+      alt="Card image cap"> --}}
+  </div>
 </div>
 
-  {{/each}}
+</div>
+</div>
+<main role="main" class="container">
+  <form class="comment-form">
+    <div>
+      <textarea style="min-width:500px; min-height:100px;" class="rounded" name="comment-body"></textarea>
+    </div>
+    <div>
+      <button id="comment-submit" class="btn d-inline-block mb-2 text-primary btn-success text-white">Add
+        comment</button>
+    </div>
 
-{{!-- <script src="/javascript/edit-blog.js"></script> --}}
-{{!-- <script src="/javascript/delete-blog.js"></script> --}}
+  </form>
+
+
+  {{/each}}
+</main>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+  integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+
+
 <script src="/javascript/comment.js"></script>
- <script src="/utils/helpers.js"></script> 
+
+
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+<link href="blog.css" rel="stylesheet">

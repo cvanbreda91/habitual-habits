@@ -3,8 +3,9 @@ const sequelize = require('../config/connection');
 const { Blog, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
+//find all blogs
 router.get("/", withAuth, (req, res) => {
-    // expects {title: 'Taskmaster goes public!', blog_post: 'https://taskmaster.com/press', user_id: 1}
+    // expects {title: 'Taskmaster goes public!', blog_post: 'Lorem Ipsum', user_id: 1}
     Blog.findAll({
         include: [
             {
@@ -24,15 +25,14 @@ router.get("/", withAuth, (req, res) => {
         .then((dbBlogData) => {
             const blogs = dbBlogData.map((blog) => blog.get({ plain: true }));
             res.render("view-blogs", { blogs, loggedIn: true})
-            // console.log(blogs)
         })
         .catch((err) => {
             console.log(err);
             res.status(500).json(err);
         });
-    // res.send("single-blog")
 });
 
+//get one blog with all comments
 router.get('/:id', withAuth, (req, res) => {
     Blog.findAll({
         where: { id: req.params.id },
@@ -60,8 +60,6 @@ router.get('/:id', withAuth, (req, res) => {
         .then(dbBlogData => {
             if (dbBlogData) {
                 const blogs = dbBlogData.map((blog) => blog.get({ plain: true }));
-                 console.log(blogs);
-
                 res.render('view-full-blog', {blogs, loggedIn:true             
                 });
             } else {

@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const sequelize = require('../config/connection');
 const { Blog, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
+//get all blogs
 router.get("/", withAuth, (req, res) => {
-    // expects {title: 'Taskmaster goes public!', blog_post: 'https://taskmaster.com/press', user_id: 1}
+    // expects {title: 'Taskmaster goes public!', blog_post: 'Lorem Ipsum', user_id: 1}
     Blog.findAll({
         where :{
         user_id: req.session.user_id},
@@ -32,9 +32,9 @@ router.get("/", withAuth, (req, res) => {
             console.log(err);
             res.status(500).json(err);
         });
-    // res.send("single-blog")
 });
 
+//get one blogs
 router.get('/:id', withAuth,(req, res) => {
     Blog.findAll({
         where: { id: req.params.id },
@@ -74,26 +74,5 @@ router.get('/:id', withAuth,(req, res) => {
             res.status(500).json(err);
         });
 });
-
-
-// router.delete('/:id', withAuth, (req, res) => {
-//     console.log('id', req.params.id);
-//     Blog.destroy({
-//         where: {
-//             id: req.params.id
-//         }
-//     })
-//         .then(dbBlogData => {
-//             if (!dbBlogData) {
-//                 res.status(404).json({ message: 'No blog found' });
-//                 return;
-//             }
-//             res.json(dbBlogData);
-//         })
-//         .catch(err => {
-//             res.status(500).json(err);
-//         });
-// });
-
 
 module.exports = router;

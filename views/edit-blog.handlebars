@@ -1,49 +1,56 @@
-<div class="container">
+<div class="container d-flex justify-content-center">
     <div class="row">
-        <article class="col">
-            <h2>
-                Edit Blog
-            </h2>
+        <section class="col">
+            <h2>Edit Blog</h2>
             {{#each blogs as |blog|}}
-            <form class="edit-blog-form">
+            <form class="new-blog-form">
                 <div>
-                    <input style="width: 500px" id="edit-blog-title" name="blog-title" type="text" value="{{blog.title}}" /><br>
-                    <textarea style="width: 500px; height:300px"id="edit-blog-post" name="blog-post" type="text">{{blog.blog_post}}</textarea>
+                    <input style="width: 500px" id="edit-blog-title" name="blog-title" type="text"
+                        value="{{blog.title}}" /><br><br>
                 </div>
                 <div>
-                    by you on {{format_date created_at}}
-                    |
-                    <a href="/edit-blogs/{{blog.id}}">{{blog.comments.length}} {{format_plural "comment"
-                        blog.comments.length}}</a>
+                    <textarea style="width: 500px; height:300px" id="edit-blog-post" name="blog-post"
+                        type="text">{{blog.blog_post}}</textarea>
                 </div>
-                <button type="button" id="save-blog-btn"class="blog-btn btn">Save blog</button>
-                <button type="button" id="delete-blog-btn" class="blog-btn btn">Delete blog</button>
+                <button id="save-blog-btn" style="color: #00FF00" type="submit"
+                    class="btn btn-success">Submit</button><br>
             </form>
+            <br>
 
+            <form class="comment-form col-4">
+                <div>
+                    <textarea style="width: 500px" name="comment-body"></textarea>
+                </div>
 
-        <form class="comment-form col-4">
-            <div>
-                <textarea style="width: 500px" name="comment-body"></textarea>
+                <div>
+                    <button style="color: #00FF00" id="comment-submit" type="button"
+                        class="btn btn-success">Comment</button>
+                </div>
+            </form>
+        </section>
+        <section class="col">
+            <div class="card-body d-flex flex align-items-start">
+                <div class="row">
+                    <div class="col-12">
+                        <br>
+                        <br>
+                        <h4>Comments</h4>
+                        {{#each blog.comments as |comment|}}
+                        <div class="card d-flex row">
+                            <strong class="d-inline-block mb-auto text-success">{{comment.comment_text}}</strong>
+                            <div class="mb-4 text-muted">by {{user.username}} </div>
+                            <p class="card-text mb-auto"></p>
+                            <a href="#">{{comment.created_at}}</a>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
             </div>
-
-            <div>
-                <button id="comment-submit" type="button" class="btn">add comment</button>
-            </div>
-        </form>
-
-{{#each blog.comments as |comment|}}
-    <section class="comment">
-        <div class="meta">
-            {{user.username}} on {{format_date createdAt}}
-            {{comment_text}}
-        </div>
-    </section>
-
+            {{/each}}
+        </section>
     </div>
 </div>
-{{/each}}
-{{/each}}
-        </article>
+
 
 <script src="/javascript/edit-blog.js"></script>
 <script src="/javascript/delete-blog.js"></script>

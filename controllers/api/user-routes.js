@@ -13,6 +13,7 @@ router.get("/", (req, res) => {
     });
 });
 
+// get single users
 router.get("/:id", (req, res) => {
   User.findOne({
     attributes: { exclude: ["password"] },
@@ -44,12 +45,6 @@ router.get("/:id", (req, res) => {
           "user_id",
         ],
       },
-      //   {
-      //     model: Blog,
-      //     attributes: ["title"],
-      //     through: Vote,
-      //     as: "voted_posts",
-      //   },
     ],
   })
     .then((dbUserData) => {
@@ -65,6 +60,7 @@ router.get("/:id", (req, res) => {
     });
 });
 
+// create a user
 router.post("/", (req, res) => {
   User.create({
     username: req.body.username,
@@ -85,6 +81,8 @@ router.post("/", (req, res) => {
       res.status(500).json(err);
     });
 });
+
+// create login
 router.post('/login', (req, res) => {
     // expects {email: 'lernantino@gmail.com', password: 'password1234'}
     User.findOne({
@@ -114,6 +112,7 @@ router.post('/login', (req, res) => {
     });
   });
 
+  // create logout
 router.post("/logout", (req, res) => {
   if (req.session.loggedIn) {
     req.session.destroy(() => {

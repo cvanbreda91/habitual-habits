@@ -3,8 +3,9 @@ const sequelize = require('../config/connection');
 const { User, Workout } = require('../models');
 const withAuth = require('../utils/auth');
 
+//get workouts
 router.get("/", withAuth, (req, res) => {
-    // expects {title: 'Taskmaster goes public!', blog_post: 'https://taskmaster.com/press', user_id: 1}
+    // expects {title: 'Taskmaster goes public!', blog_post: 'Lorem Ipsum', user_id: 1}
     Workout.findAll({
         user_id: req.session.user_id,
         attributes: [
@@ -33,9 +34,9 @@ router.get("/", withAuth, (req, res) => {
             console.log(err);
             res.status(500).json(err);
         });
-    // res.send("single-blog")
 });
 
+//get one workout
 router.get('/:id', withAuth, (req, res) => {
     Workout.findByPk(req.params.id, {
         attributes: [

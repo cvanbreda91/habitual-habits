@@ -1,21 +1,20 @@
-<section>
-    <h2>All Blogs</h2>
+<h2>All Blogs</h2>
+<section class="container d-flex">
     {{#each blogs as |blog|}}
-    {{!-- {{> post-blog-full blog}} --}}
-    <article>
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">{{title}}</h5>
-                <p class="card-text">{{format_blog blog_post}}</p>
-                <strong>
-                    <p class="card-text">by: {{user.username}}</p>
-                </strong>
-                <strong>
-                    <p class="card-text">on: {{format_date createdAt}}</p>
-                </strong>
-                <a href="/view-blogs/{{id}}" class="btn btn-primary">Go to post!</a>
-            </div>
+    <div class="card d-flex" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{title}}</h5>
+            <p class="card-text">{{format_blog blog_post}}</p>
+            <strong>
+                <p class="card-text">by: {{user.username}}</p>
+            </strong>
+            <strong>
+                <p class="card-text">on: {{format_date createdAt}}</p>
+            </strong>
+            <a href="/view-blogs/{{id}}" class="btn btn-success">Go to post!</a>
+
         </div>
-        {{/each}}
+    </div>
+    {{/each}}
 </section>
 <script src="/utils/helpers.js"></script>

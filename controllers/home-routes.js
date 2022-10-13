@@ -1,32 +1,30 @@
 const router = require('express').Router();
-const sequelize = require('../config/connection');
 const { Blog, User, Workout } = require('../models');
 
+//homepage
 router.get('/',(req,res) => {
-    
         res.render('homepage')
-
 } );
 
+//login
 router.get('/login', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/');
         return;
     }
-
     res.render('login');
 });
 
+//sign-up
 router.get('/sign-up', (req, res) => {
     if (req.session.loggedIn) {
         res.redirect('/');
         return;
     }
-
     res.render('sign-up');
 });
 
-// get single post
+// get single blog
 router.get('/blogs/:id', (req, res) => {
     Blog.findOne({
         where: {
@@ -63,7 +61,6 @@ router.get('/blogs/:id', (req, res) => {
 
             res.render('single-blog', {
                 blog,
-                //loggedIn: req.session.loggedIn
             });
         })
         .catch(err => {
@@ -72,7 +69,6 @@ router.get('/blogs/:id', (req, res) => {
 });
 
 router.get('/workout-tracker-info', (req, res) => {
-
     res.render('workout-tracker-info');
 });
 

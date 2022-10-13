@@ -25,4 +25,4 @@ async function loginFormHandler(event) {
 
 
 //update if different classes used in handlebars
-document.querySelector('.form-signin').addEventListener('submit', loginFormHandler);
+document.querySelector('#sign-in').addEventListener('click', loginFormHandler);
