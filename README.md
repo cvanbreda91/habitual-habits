@@ -55,7 +55,7 @@ Please email us with questions!
 * cvanbreda91@gmail.com
 
 ## Screenshot
-![website-image]![image](https://user-images.githubusercontent.com/108283919/195722424-7f728448-5ce5-4d6b-a917-70f9a58833c4.png)
+![website-image](https://user-images.githubusercontent.com/108283919/195722424-7f728448-5ce5-4d6b-a917-70f9a58833c4.png)
 
 
 ## Deployed Site
