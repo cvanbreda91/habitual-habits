@@ -6,8 +6,7 @@
   "scripts": {
     "run": "node server.js",
     "test": "jest",
-    "seeds": "node seeds/index.js",
-    "build": "browserify app.js -o bundle.js"
+    "seeds": "node seeds/index.js"
   },
   "repository": {
     "type": "git",
