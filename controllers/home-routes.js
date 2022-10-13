@@ -15,6 +15,11 @@ router.get('/login', (req, res) => {
     res.render('login');
 });
 
+//logout
+router.get('/logout', (req, res) => {
+    res.render('homepage');
+});
+
 //sign-up
 router.get('/sign-up', (req, res) => {
     if (req.session.loggedIn) {

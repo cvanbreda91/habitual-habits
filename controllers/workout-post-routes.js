@@ -7,7 +7,9 @@ const withAuth = require('../utils/auth');
 router.get("/", withAuth, (req, res) => {
     // expects {title: 'Taskmaster goes public!', blog_post: 'Lorem Ipsum', user_id: 1}
     Workout.findAll({
-        user_id: req.session.user_id,
+        where: {
+            user_id: req.session.user_id,
+          },
         attributes: [
             'id',
             'exercise_type',

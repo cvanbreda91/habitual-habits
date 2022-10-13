@@ -12,4 +12,4 @@ async function logout() {
 }
 
 //update if different classes used in handlebars
-document.querySelector('#logout').addEventListener('click', logout);
+document.querySelector('#logout').addEventListener('submit', logout);
